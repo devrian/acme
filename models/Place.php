@@ -16,7 +16,7 @@ use Yii;
  *
  * @property PlaceLang[] $placeLangs
  * @property Trip[] $fromTrips
- * @property Trip[] $toTrips0
+ * @property Trip[] $toTrips
  */
 class Place extends \yii\db\ActiveRecord
 {
@@ -75,7 +75,7 @@ class Place extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getToTrips0()
+    public function getToTrips()
     {
         return $this->hasMany(Trip::className(), ['to' => 'id']);
     }

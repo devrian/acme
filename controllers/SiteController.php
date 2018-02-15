@@ -9,6 +9,8 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\models\User;
+use app\models\Mailer as AcmeMailer;
 
 class SiteController extends Controller
 {
@@ -81,6 +83,27 @@ class SiteController extends Controller
         }
         return $this->render('login', [
             'model' => $model,
+        ]);
+    }
+
+    public function actionRegister()
+    {
+        if (!Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+
+        $new_user = new User();
+        if (
+            $new_user->load(Yii::$app->request->post()) &&
+            $new_user->save() &&
+            AcmeMailer::send(AcmeMailer::TYPE_REGISTRATION, $new_user)
+        ) {
+            Yii::$app->session->setFlash('success', Yii::t('app', 'Successfully Regsitered'));
+            return $this->goHome();
+        }
+
+        return $this->render('register', [
+            'new_user' => $new_user
         ]);
     }
 

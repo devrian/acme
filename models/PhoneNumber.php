@@ -16,6 +16,7 @@ use Yii;
  * @property int $active
  * @property string $created
  *
+ * @property Country $country
  * @property User $user
  */
 class PhoneNumber extends \yii\db\ActiveRecord
@@ -59,6 +60,13 @@ class PhoneNumber extends \yii\db\ActiveRecord
         ];
     }
 
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCountry()
+    {
+        return $this->hasOne(Country::className(), ['id' => 'country_id']);
+    }
     /**
      * @return \yii\db\ActiveQuery
      */

@@ -22,8 +22,8 @@ use Yii;
  *
  * @property Message[] $messages
  * @property Currency $currency
- * @property Place $from0
- * @property Place $to0
+ * @property Place $fromPlace
+ * @property Place $toPlace
  * @property User $user
  */
 class Trip extends \yii\db\ActiveRecord
@@ -93,7 +93,7 @@ class Trip extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getFrom0()
+    public function getFromPlace()
     {
         return $this->hasOne(Place::className(), ['id' => 'from']);
     }
@@ -101,7 +101,7 @@ class Trip extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getTo0()
+    public function getToPlace()
     {
         return $this->hasOne(Place::className(), ['id' => 'to']);
     }
